@@ -1,11 +1,13 @@
 // ignore_for_file: prefer_const_constructors
 
 import 'package:flutter/material.dart';
-import 'package:todoapp/constant.dart';
-import 'package:todoapp/screens/main_page.dart';
+import 'package:provider/provider.dart';
+import 'package:todoapp/providers/note_provider.dart';
+import 'package:todoapp/providers/schedule_provider.dart';
 import 'package:todoapp/screens/main_splash.dart';
 
 void main() {
+  WidgetsFlutterBinding.ensureInitialized();
   runApp(const MyApp());
 }
 
@@ -14,12 +16,17 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      debugShowCheckedModeBanner: false,
-      title: 'On Time',
-      theme: ThemeData(
+    return MultiProvider(
+      providers: [
+        ChangeNotifierProvider(create: (_) => NoteProvider()),
+        ChangeNotifierProvider(create: (_) => ScheduleProvider()),
+      ],
+      child: MaterialApp(
+        debugShowCheckedModeBanner: false,
+        title: 'On Time',
+        theme: ThemeData(),
+        home: MainSplash(),
       ),
-      home: MainSplash(),
     );
   }
 }

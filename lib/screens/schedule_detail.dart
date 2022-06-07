@@ -17,6 +17,9 @@ class SchedulDetail extends StatefulWidget {
 
 class _SchedulDetailState extends State<SchedulDetail> {
   bool checkedValue = false;
+  final TextEditingController scheduleController = TextEditingController();
+  final TextEditingController locationController = TextEditingController();
+  final TextEditingController noteController = TextEditingController();
 
   @override
   Widget build(BuildContext context) {
@@ -67,6 +70,7 @@ class _SchedulDetailState extends State<SchedulDetail> {
               height: 10,
             ),
             CustomTextField(
+              txtEditingController: scheduleController,
               hintTxt: 'Meeting with anomale team',
               keyboardType: TextInputType.text,
               maxLines: 1,
@@ -92,9 +96,16 @@ class _SchedulDetailState extends State<SchedulDetail> {
             Padding(
               padding: const EdgeInsets.only(bottom: 10),
               child: CustomTextField(
-                  hintTxt: 'Location', keyboardType: TextInputType.text),
+                txtEditingController: locationController,
+                hintTxt: 'Location',
+                keyboardType: TextInputType.text,
+              ),
             ),
-            CustomTextField(hintTxt: 'Note', keyboardType: TextInputType.text),
+            CustomTextField(
+              txtEditingController: noteController,
+              hintTxt: 'Note',
+              keyboardType: TextInputType.text,
+            ),
           ],
         ),
       ),

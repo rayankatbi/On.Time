@@ -1,0 +1,36 @@
+import 'package:flutter/material.dart';
+import 'package:todoapp/helpers/note_database_helper.dart';
+import 'package:todoapp/models/note_model.dart';
+
+class NoteProvider with ChangeNotifier {
+  List<Note> _items = [];
+  List<Note> get items => [..._items];
+
+  Future getNotes() async {
+    _items = await NoteDatabaseHelper.instance.getNotes();
+    notifyListeners();
+  }
+
+  Future addNotes(Note note) async {
+    _items.insert(0, note);
+    notifyListeners();
+    await NoteDatabaseHelper.instance.addNote(note);
+  }
+
+  Future updateNote(Note note) async {
+    final index = _items.indexWhere((e) => e.id == note.id);
+    _items[index] == note;
+    notifyListeners();
+    await NoteDatabaseHelper.instance.updateNote(note);
+  }
+
+  Future removeNote(Note note) async {
+    _items.removeWhere((e) => e.id == note.id);
+    notifyListeners();
+    await NoteDatabaseHelper.instance.removeNote(note);
+  }
+
+  int lengthItems() {
+    return _items.length;
+  }
+}

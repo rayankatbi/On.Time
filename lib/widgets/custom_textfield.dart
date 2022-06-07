@@ -4,20 +4,19 @@ import 'dart:ui';
 
 import 'package:flutter/material.dart';
 import 'package:todoapp/constant.dart';
-import 'package:todoapp/widgets/custom_text.dart';
 
 class CustomTextField extends StatelessWidget {
-  const CustomTextField(
-      {Key? key,
-      //required this.labelTxt,
-      this.prefixIcon,
-      required this.hintTxt,
-      this.maxLines,
-      required this.keyboardType,
-   //   required this.heightPro,
-   //     required this.widthPro,
-      })
-      : super(key: key);
+  CustomTextField({
+    Key? key,
+    //required this.labelTxt,
+    this.prefixIcon,
+    required this.hintTxt,
+    this.maxLines,
+    required this.keyboardType,
+    //   required this.heightPro,
+    //     required this.widthPro,
+    required this.txtEditingController,
+  }) : super(key: key);
 
   // final String labelTxt;
   final IconData? prefixIcon;
@@ -25,7 +24,8 @@ class CustomTextField extends StatelessWidget {
   final int? maxLines;
   final TextInputType keyboardType;
   //final heightPro  ;
- // final widthPro;
+  // final widthPro;
+  TextEditingController txtEditingController = TextEditingController();
 
   @override
   Widget build(BuildContext context) {
@@ -33,6 +33,7 @@ class CustomTextField extends StatelessWidget {
     final width = MediaQuery.of(context).size.width;
 
     return TextField(
+      controller: txtEditingController,
       keyboardType: keyboardType,
       maxLines: maxLines,
       style: TextStyle(

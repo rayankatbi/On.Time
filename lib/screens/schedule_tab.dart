@@ -26,9 +26,9 @@ class _ScheduleTabState extends State<ScheduleTab> {
                 selectedTextStyle: TextStyle(
                   color: Style.lightMov,
                 ),
-                defaultTextStyle:TextStyle(
+                defaultTextStyle: TextStyle(
                   color: Style.white,
-                ) ,
+                ),
                 weekendTextStyle: TextStyle(color: Colors.red),
                 outsideTextStyle: TextStyle(
                   color: Colors.grey,
@@ -66,8 +66,7 @@ class _ScheduleTabState extends State<ScheduleTab> {
               size: 20,
             ),
             ListView.builder(
-              shrinkWrap: true,
-                primary: true,
+                shrinkWrap: true,
                 itemCount: 3,
                 itemBuilder: (BuildContext context, int index) {
                   return CardSchedule();
