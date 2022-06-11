@@ -1,14 +1,19 @@
 import 'package:sqflite/sqflite.dart';
+import 'package:todoapp/helpers/database_helper.dart';
 import 'package:todoapp/models/schedule_model.dart';
-import 'package:todoapp/sqflite_tuturial/home_sqflite.dart';
+
 
 class ScheduleDatabaseHelper {
-  ScheduleDatabaseHelper._privateConstructor();
-  static final ScheduleDatabaseHelper instance =
-      ScheduleDatabaseHelper._privateConstructor();
+
+  static final ScheduleDatabaseHelper instance = ScheduleDatabaseHelper._init();
+  ScheduleDatabaseHelper._init();
+
+  // ScheduleDatabaseHelper._privateConstructor();
+  //  final ScheduleDatabaseHelper instance =
+  //     ScheduleDatabaseHelper._privateConstructor();
 
   Future<List<Schedule>> getSchedule() async {
-    Database db = await DatabaseHelper.instance.database;
+    Database db = await DataBaseHelper.instance.database;
     final List<Map<String, Object?>> schedules =
         await db.query(scheduleTable, orderBy: 'id');
     List<Schedule> scheduleList = schedules.isNotEmpty
@@ -18,12 +23,12 @@ class ScheduleDatabaseHelper {
   }
 
   Future<int> addSchedule(Schedule schedule) async {
-    Database db = await DatabaseHelper.instance.database;
+    Database db = await DataBaseHelper.instance.database;
     return await db.insert(scheduleTable, schedule.toJson());
   }
 
   Future<int> updateSchedule(Schedule schedule) async {
-    Database db = await DatabaseHelper.instance.database;
+    Database db = await DataBaseHelper.instance.database;
     return await db.update(
       scheduleTable,
       schedule.toJson(),
@@ -33,7 +38,7 @@ class ScheduleDatabaseHelper {
   }
 
   Future<int> removeSchedule(Schedule schedule) async {
-    Database db = await DatabaseHelper.instance.database;
+    Database db = await DataBaseHelper.instance.database;
     return await db.delete(
       scheduleTable,
       where: 'id=?',

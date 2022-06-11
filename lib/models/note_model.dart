@@ -1,13 +1,13 @@
 const String notTable = "Note";
 
 class Note {
-  final int? id;
+   final int id ;
   final String title;
   final String content;
   final String createdTime;
 
   Note({
-     this.id,
+   required this.id,
     required this.title,
     required this.content,
     required this.createdTime,
@@ -22,7 +22,7 @@ class Note {
 
   Map<String, dynamic> toJson() {
     return {
-      "id": id,
+     // "id": id,
       "title": title,
       "content": content,
       "createdTime": createdTime,

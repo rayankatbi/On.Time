@@ -1,7 +1,7 @@
 const String scheduleTable = "Schedule";
 
 class Schedule {
-  final int id;
+  final String id;
   final String title;
   final bool isFullDay;
   final String  startDate;

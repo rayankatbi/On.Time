@@ -21,7 +21,7 @@ class NoteDetail extends StatelessWidget {
 
   String? title;
   String? content;
-  int? selectedId;
+  String? selectedId;
 
   @override
   Widget build(BuildContext context) {
@@ -35,6 +35,7 @@ class NoteDetail extends StatelessWidget {
         backgroundColor: Style.cardColor,
         elevation: 0,
         actions: [
+          /*
           IconButton(
             onPressed: () {
               note.updateNote(
@@ -51,6 +52,7 @@ class NoteDetail extends StatelessWidget {
               color: Colors.white,
             ),
           ),
+           */
           IconButton(
             onPressed: () {
               note.addNotes(
@@ -58,6 +60,7 @@ class NoteDetail extends StatelessWidget {
                   title: titleNoteController.text,
                   content: detailNoteController.text,
                   createdTime: formattedDate,
+                  id: 0,
                 ),
               );
               Navigator.pop(context);

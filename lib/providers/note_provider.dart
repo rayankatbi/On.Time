@@ -24,10 +24,10 @@ class NoteProvider with ChangeNotifier {
     await NoteDatabaseHelper.instance.updateNote(note);
   }
 
-  Future removeNote(Note note) async {
-    _items.removeWhere((e) => e.id == note.id);
+  Future removeNote(int id) async {
+    _items.removeWhere((e) => e.id == id);
     notifyListeners();
-    await NoteDatabaseHelper.instance.removeNote(note);
+    await NoteDatabaseHelper.instance.removeNote(id);
   }
 
   int lengthItems() {
