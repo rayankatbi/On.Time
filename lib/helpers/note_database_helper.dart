@@ -3,13 +3,8 @@ import 'package:todoapp/models/note_model.dart';
 import 'package:sqflite/sqflite.dart';
 
 class NoteDatabaseHelper {
-
   static final NoteDatabaseHelper instance = NoteDatabaseHelper._init();
   NoteDatabaseHelper._init();
-  // NoteDatabaseHelper._privateConstructor();
-  //
-  //  final NoteDatabaseHelper instance =
-  //     NoteDatabaseHelper._privateConstructor();
 
   Future<List<Note>> getNotes() async {
     Database db = await DataBaseHelper.instance.database;
@@ -22,7 +17,9 @@ class NoteDatabaseHelper {
 
   Future<int> addNote(Note note) async {
     Database db = await DataBaseHelper.instance.database;
-    var result =  await db.insert(notTable, note.toJson());
+    var result = await db.insert(notTable, note.toJson());
+    //print(db.query("SELECT * FROM id"));
+    print(" result = ${result}");
     return result;
   }
 
@@ -38,9 +35,11 @@ class NoteDatabaseHelper {
 
   Future<int> removeNote(int id) async {
     Database db = await DataBaseHelper.instance.database;
+    print(id);
+
     return await db.delete(
       notTable,
-      where: 'id=?',
+      where: 'id = ?',
       whereArgs: [id],
     );
   }

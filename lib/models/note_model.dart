@@ -1,13 +1,13 @@
 const String notTable = "Note";
 
 class Note {
-   final int id ;
+   final int? id ;
   final String title;
   final String content;
   final String createdTime;
 
   Note({
-   required this.id,
+     this.id,
     required this.title,
     required this.content,
     required this.createdTime,

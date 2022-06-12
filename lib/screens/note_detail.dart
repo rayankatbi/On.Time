@@ -4,27 +4,41 @@ import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 import 'package:provider/provider.dart';
 import 'package:todoapp/constant.dart';
+import 'package:todoapp/helpers/note_database_helper.dart';
 import 'package:todoapp/models/note_model.dart';
 import 'package:todoapp/providers/note_provider.dart';
 import 'package:todoapp/widgets/custom_textfield.dart';
 
-class NoteDetail extends StatelessWidget {
+class NoteDetail extends StatefulWidget {
   NoteDetail({
     Key? key,
     this.title,
     this.content,
-    this.selectedId,
+   // this.selectedId,
   }) : super(key: key);
-
-  final TextEditingController detailNoteController = TextEditingController();
-  final TextEditingController titleNoteController = TextEditingController();
 
   String? title;
   String? content;
-  String? selectedId;
+   //int? selectedId;
+
+  @override
+  State<NoteDetail> createState() => _NoteDetailState();
+}
+
+class _NoteDetailState extends State<NoteDetail> {
+  final TextEditingController detailNoteController = TextEditingController();
+
+  final TextEditingController titleNoteController = TextEditingController();
+
+  @override
+  // void initState() {
+  //   titleNoteController.text = widget.title!;
+  //   detailNoteController.text = widget.content!;
+  // }
 
   @override
   Widget build(BuildContext context) {
+
     final note = Provider.of<NoteProvider>(context);
     DateTime now = DateTime.now();
     String formattedDate = DateFormat.yMMMEd().format(now);
@@ -55,14 +69,20 @@ class NoteDetail extends StatelessWidget {
            */
           IconButton(
             onPressed: () {
+
+              //print(' selected id = ${widget.selectedId}');
+
               note.addNotes(
                 Note(
                   title: titleNoteController.text,
                   content: detailNoteController.text,
                   createdTime: formattedDate,
-                  id: 0,
+                  //id: 1,
                 ),
               );
+              setState(() {
+
+              });
               Navigator.pop(context);
             },
             icon: Icon(Icons.check, color: Colors.white),

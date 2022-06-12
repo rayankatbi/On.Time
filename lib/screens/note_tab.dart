@@ -33,46 +33,46 @@ class NoteTab extends StatelessWidget {
               prefixIcon: Icons.search,
               keyboardType: TextInputType.text,
             ),
-            // note.items.isEmpty
-            //     ? Container(
-            //         margin: EdgeInsets.symmetric(vertical: 10),
-            //         decoration: BoxDecoration(
-            //           borderRadius: BorderRadius.circular(15),
-            //           color: Style.cardColor,
-            //         ),
-            //         padding: EdgeInsets.all(10),
-            //         child: CustomText(title: 'You didn\'t have any Note ,'),
-            //       )
-            //     :
-            ListView.builder(
-                primary: true,
-                shrinkWrap: true,
-                itemCount: note.lengthItems(),
-                itemBuilder: (BuildContext context, int index) {
-                  return GestureDetector(
-                    onTap: () {
-                      Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                          builder: (context) => NoteDetail(
-                            selectedId: "${note.items[index].id}",
+            note.items.isEmpty
+                ? Container(
+                    margin: EdgeInsets.symmetric(vertical: 10),
+                    decoration: BoxDecoration(
+                      borderRadius: BorderRadius.circular(15),
+                      color: Style.cardColor,
+                    ),
+                    padding: EdgeInsets.all(10),
+                    child: CustomText(title: 'You didn\'t have any Note ,'),
+                  )
+                : ListView.builder(
+                    primary: true,
+                    shrinkWrap: true,
+                    itemCount: note.lengthItems(),
+                    itemBuilder: (BuildContext context, int index) {
+                      return GestureDetector(
+                        onTap: () {
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                              builder: (context) => NoteDetail(
+                                // selectedId: note.items[index].id,
+                                title: note.items[index].title,
+                                // date: note.items[index].createdTime,
+                                content: note.items[index].content,
+                              ),
+                            ),
+                            //note.items[index].id,),
+                          );
+                        },
+                        child: CardNote(
+                          notee: Note(
                             title: note.items[index].title,
-                            // date: note.items[index].createdTime,
+                            createdTime: note.items[index].createdTime,
                             content: note.items[index].content,
+                            id: note.items[index].id,
                           ),
                         ),
-                        //note.items[index].id,),
                       );
-                    },
-                    child: CardNote(
-                      title: note.items[index].title,
-                      date: note.items[index].createdTime,
-                      content: note.items[index].content,
-                      idtodelet:note.items[index].id ,
-
-                    ),
-                  );
-                }),
+                    }),
           ],
         ),
       ),

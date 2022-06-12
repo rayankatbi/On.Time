@@ -55,7 +55,7 @@ class DataBaseHelper {
 
     await db.execute('''
      CREATE TABLE $notTable (
-     $idNote INTEGER PRIMARY KEY AUTOINCREMENT,
+     $idNote INTEGER PRIMARY KEY AUTOINCREMENT ,
      $titleNote TEXT NOT NULL,
      $contentNote TEXT NOT NULL,
      $createdTimeNote TEXT NOT NULL

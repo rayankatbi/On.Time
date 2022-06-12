@@ -12,9 +12,8 @@ class NoteProvider with ChangeNotifier {
   }
 
   Future addNotes(Note note) async {
-    _items.insert(0, note);
+    _items.insert(0, await  NoteDatabaseHelper.instance.addNote(note));
     notifyListeners();
-    await NoteDatabaseHelper.instance.addNote(note);
   }
 
   Future updateNote(Note note) async {

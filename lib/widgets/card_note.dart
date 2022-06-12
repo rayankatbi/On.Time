@@ -10,17 +10,19 @@ import 'package:todoapp/widgets/custom_text.dart';
 class CardNote extends StatelessWidget {
   CardNote({
     Key? key,
-    required this.title,
-    required this.date,
-    required this.content,
-    required this.idtodelet,
+    // required this.title,
+    // required this.date,
+    // required this.content,
+    // required this.idtodelet,
+    required this.notee,
     // required this.onPressed,
   }) : super(key: key);
 
-  final String title;
-  final String date;
-  final String content;
-  final int idtodelet;
+  Note notee;
+  // final String title;
+  // final String date;
+  // final String content;
+  // final int idtodelet;
   // final Function onPressed;
   @override
   Widget build(BuildContext context) {
@@ -36,7 +38,8 @@ class CardNote extends StatelessWidget {
         children: [
           IconButton(
             onPressed: () {
-              note.removeNote(idtodelet);
+              print(' notee.id = ${notee.id}');
+              note.removeNote(notee.id!);
             },
             icon: Icon(
               Icons.delete,
@@ -44,7 +47,7 @@ class CardNote extends StatelessWidget {
             ),
           ),
           CustomText(
-            title: title,
+            title: notee.title,
             color: Style.white,
             maxLines: 1,
             size: 18,
@@ -53,7 +56,7 @@ class CardNote extends StatelessWidget {
             height: 5,
           ),
           CustomText(
-            title: content,
+            title: notee.content,
             color: Style.white,
             maxLines: 4,
           ),
@@ -61,7 +64,7 @@ class CardNote extends StatelessWidget {
             height: 5,
           ),
           CustomText(
-            title: date,
+            title: notee.createdTime,
             color: Style.white,
           )
         ],
