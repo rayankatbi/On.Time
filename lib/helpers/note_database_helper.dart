@@ -15,12 +15,20 @@ class NoteDatabaseHelper {
     return notesList;
   }
 
-  Future<int> addNote(Note note) async {
+  Future<Note> addNote(Note note) async {
     Database db = await DataBaseHelper.instance.database;
-    var result = await db.insert(notTable, note.toJson());
-    //print(db.query("SELECT * FROM id"));
-    print(" result = ${result}");
-    return result;
+    await db.insert(notTable, note.toJson());
+
+    final justAddedNote = Note.fromJson(
+      (await db.query(
+        notTable,
+        orderBy: 'id DESC',
+        limit: 1,
+      ))
+          .first,
+    );
+
+    return justAddedNote;
   }
 
   Future<int> updateNote(Note note) async {
