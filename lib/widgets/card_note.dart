@@ -10,20 +10,10 @@ import 'package:todoapp/widgets/custom_text.dart';
 class CardNote extends StatelessWidget {
   CardNote({
     Key? key,
-    // required this.title,
-    // required this.date,
-    // required this.content,
-    // required this.idtodelet,
     required this.notee,
-    // required this.onPressed,
   }) : super(key: key);
 
   Note notee;
-  // final String title;
-  // final String date;
-  // final String content;
-  // final int idtodelet;
-  // final Function onPressed;
   @override
   Widget build(BuildContext context) {
     final note = Provider.of<NoteProvider>(context);
@@ -66,7 +56,7 @@ class CardNote extends StatelessWidget {
           CustomText(
             title: notee.createdTime,
             color: Style.white,
-          )
+          ),
         ],
       ),
     );

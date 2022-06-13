@@ -50,14 +50,20 @@ class NoteTab extends StatelessWidget {
                     itemBuilder: (BuildContext context, int index) {
                       return GestureDetector(
                         onTap: () {
+                          print('${note.items[index].id!}');
                           Navigator.push(
                             context,
                             MaterialPageRoute(
                               builder: (context) => NoteDetail(
-                                // selectedId: note.items[index].id,
-                                title: note.items[index].title,
+                                notee: Note(
+                                  title: note.items[index].title,
+                                  content: note.items[index].content,
+                                  createdTime: note.items[index].createdTime,
+                                ),
+                                // selectId: note.items[index].id!,
+                                // title: note.items[index].title,
                                 // date: note.items[index].createdTime,
-                                content: note.items[index].content,
+                                // content: note.items[index].content,
                               ),
                             ),
                             //note.items[index].id,),

@@ -18,7 +18,6 @@ class NoteDatabaseHelper {
   Future<Note> addNote(Note note) async {
     Database db = await DataBaseHelper.instance.database;
     await db.insert(notTable, note.toJson());
-
     final justAddedNote = Note.fromJson(
       (await db.query(
         notTable,
@@ -27,9 +26,22 @@ class NoteDatabaseHelper {
       ))
           .first,
     );
-
     return justAddedNote;
   }
+/*
+  Future<Note> updateNote(Note note) async {
+    Database db = await DataBaseHelper.instance.database;
+    final justupdaeNote = Note.fromJson(
+      (await db.query(
+        notTable,
+        orderBy: 'id DESC',
+        limit: 1,
+      ))
+          .first,
+    );
+    return justupdaeNote;
+  }
+ */
 
   Future<int> updateNote(Note note) async {
     Database db = await DataBaseHelper.instance.database;
