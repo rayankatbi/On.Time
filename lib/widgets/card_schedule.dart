@@ -21,7 +21,7 @@ class _CardScheduleState extends State<CardSchedule> {
           color: Style.cardColor,
           borderRadius: BorderRadius.circular(15),
         ),
-        padding: EdgeInsets.symmetric(horizontal: 10,vertical:5 ),
+        padding: EdgeInsets.symmetric(horizontal: 10, vertical: 5),
         child: Column(
           children: [
             Row(

@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 import 'package:table_calendar/table_calendar.dart';
 import 'package:todoapp/constant.dart';
+import 'package:todoapp/providers/schedule_provider.dart';
 import 'package:todoapp/widgets/card_schedule.dart';
 import 'package:todoapp/widgets/custom_text.dart';
 
@@ -15,6 +17,7 @@ class _ScheduleTabState extends State<ScheduleTab> {
   @override
   @override
   Widget build(BuildContext context) {
+    final schedule = Provider.of<ScheduleProvider>(context);
     return Padding(
       padding: const EdgeInsets.symmetric(horizontal: 10),
       child: SingleChildScrollView(
@@ -65,7 +68,18 @@ class _ScheduleTabState extends State<ScheduleTab> {
               fontWeight: FontWeight.w500,
               size: 20,
             ),
+            schedule.items.isEmpty?
+            Container(
+              margin: EdgeInsets.symmetric(vertical: 10),
+              decoration: BoxDecoration(
+                borderRadius: BorderRadius.circular(15),
+                color: Style.cardColor,
+              ),
+              padding: EdgeInsets.all(10),
+              child: CustomText(title: 'You didn\'t have any Schedule ,'),
+            ):
             ListView.builder(
+              primary: true,
                 shrinkWrap: true,
                 itemCount: 3,
                 itemBuilder: (BuildContext context, int index) {

@@ -1,6 +1,3 @@
-import 'dart:io';
-
-import 'package:path_provider/path_provider.dart';
 import 'package:sqflite/sqflite.dart';
 import 'package:todoapp/models/note_model.dart';
 import 'package:todoapp/models/schedule_model.dart';

@@ -11,26 +11,25 @@ class NoteDetail extends StatefulWidget {
   NoteDetail({
     Key? key,
     this.notee,
-   // this.selectId,
-    // this.title,
-    // this.content,
-    // this.selectedId,
   }) : super(key: key);
 
-  // String? title;
-  // String? content;
-  //int? selectedId;
   Note? notee;
-  //int? selectId;
   @override
   State<NoteDetail> createState() => _NoteDetailState();
 }
 
 class _NoteDetailState extends State<NoteDetail> {
-  final TextEditingController detailNoteController = TextEditingController();
+  late final TextEditingController detailNoteController =
+      TextEditingController(text: widget.notee?.content);
 
-  final TextEditingController titleNoteController = TextEditingController();
+  late final TextEditingController titleNoteController =
+      TextEditingController(text: widget.notee?.title);
 
+//  @override
+  // void dispose() {
+  //   detailNoteController.text = '';
+  //   titleNoteController.text = '';
+  // }
   @override
   Widget build(BuildContext context) {
     final note = Provider.of<NoteProvider>(context);
@@ -65,18 +64,19 @@ class _NoteDetailState extends State<NoteDetail> {
               widget.notee != null
                   ? note.updateNote(
                       Note(
+                        id: widget.notee!.id,
                         title: titleNoteController.text,
                         content: detailNoteController.text,
                         createdTime: formattedDate,
                       ),
                     )
-             : note.addNotes(
-                Note(
-                  title: titleNoteController.text,
-                  content: detailNoteController.text,
-                  createdTime: formattedDate,
-                ),
-              );
+                  : note.addNotes(
+                      Note(
+                        title: titleNoteController.text,
+                        content: detailNoteController.text,
+                        createdTime: formattedDate,
+                      ),
+                    );
               Navigator.pop(context);
             },
             icon: Icon(Icons.check, color: Colors.white),

@@ -2,15 +2,9 @@ import 'package:sqflite/sqflite.dart';
 import 'package:todoapp/helpers/database_helper.dart';
 import 'package:todoapp/models/schedule_model.dart';
 
-
 class ScheduleDatabaseHelper {
-
   static final ScheduleDatabaseHelper instance = ScheduleDatabaseHelper._init();
   ScheduleDatabaseHelper._init();
-
-  // ScheduleDatabaseHelper._privateConstructor();
-  //  final ScheduleDatabaseHelper instance =
-  //     ScheduleDatabaseHelper._privateConstructor();
 
   Future<List<Schedule>> getSchedule() async {
     Database db = await DataBaseHelper.instance.database;

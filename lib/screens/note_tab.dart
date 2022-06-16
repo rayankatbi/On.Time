@@ -56,15 +56,12 @@ class NoteTab extends StatelessWidget {
                             MaterialPageRoute(
                               builder: (context) => NoteDetail(
                                 notee: Note(
+                                  id: note.items[index].id,
                                   title: note.items[index].title,
                                   content: note.items[index].content,
                                   createdTime: note.items[index].createdTime,
                                 ),
-                                // selectId: note.items[index].id!,
-                                // title: note.items[index].title,
-                                // date: note.items[index].createdTime,
-                                // content: note.items[index].content,
-                              ),
+                                  ),
                             ),
                             //note.items[index].id,),
                           );
