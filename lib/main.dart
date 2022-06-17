@@ -24,7 +24,6 @@ class MyApp extends StatelessWidget {
       child: MaterialApp(
         debugShowCheckedModeBanner: false,
         title: 'On Time',
-        theme: ThemeData(),
         home: MainSplash(),
       ),
     );

@@ -41,7 +41,10 @@ class NoteTab extends StatelessWidget {
                       color: Style.cardColor,
                     ),
                     padding: EdgeInsets.all(10),
-                    child: CustomText(title: 'You didn\'t have any Note ,'),
+                    child: CustomText(
+                      title: 'You didn\'t Have Any Note',
+                      color: Colors.white,
+                    ),
                   )
                 : ListView.builder(
                     primary: true,
@@ -61,7 +64,7 @@ class NoteTab extends StatelessWidget {
                                   content: note.items[index].content,
                                   createdTime: note.items[index].createdTime,
                                 ),
-                                  ),
+                              ),
                             ),
                             //note.items[index].id,),
                           );

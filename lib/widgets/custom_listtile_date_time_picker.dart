@@ -25,19 +25,38 @@ class _CustomListTileDateTimePickerState
   @override
   Widget build(BuildContext context) {
     Future<DateTime?> pickDate() => showDatePicker(
-          context: context,
-          initialDate: dateTime,
-          firstDate: DateTime(1900),
-          lastDate: DateTime(2100),
-        );
+        context: context,
+        initialDate: dateTime,
+        firstDate: DateTime(1900),
+        lastDate: DateTime(2100),
+        builder: (context, child) {
+          return Theme(
+              data: Theme.of(context).copyWith(
+                colorScheme: ColorScheme.light(
+                  primary: Style.cardColor,
+                  onPrimary: Style.white,
+                ),
+              ),
+              child: child!);
+        });
     Future<TimeOfDay?> pickTime() {
       return showTimePicker(
-        context: context,
-        initialTime: TimeOfDay(
-          hour: dateTime.hour,
-          minute: dateTime.minute,
-        ),
-      );
+          context: context,
+          initialTime: TimeOfDay(
+            hour: dateTime.hour,
+            minute: dateTime.minute,
+          ),
+          builder: (context, child) {
+            return Theme(
+                data: Theme.of(context).copyWith(
+                  colorScheme: ColorScheme.light(
+                    primary: Style.cardColor,
+                    onPrimary: Style.white,
+                    onBackground: Style.lightMov,
+                  ),
+                ),
+                child: child!);
+          });
     }
 
     Future pickDateTime() async {

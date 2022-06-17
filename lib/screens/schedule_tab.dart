@@ -68,23 +68,27 @@ class _ScheduleTabState extends State<ScheduleTab> {
               fontWeight: FontWeight.w500,
               size: 20,
             ),
-            schedule.items.isEmpty?
-            Container(
-              margin: EdgeInsets.symmetric(vertical: 10),
-              decoration: BoxDecoration(
-                borderRadius: BorderRadius.circular(15),
-                color: Style.cardColor,
-              ),
-              padding: EdgeInsets.all(10),
-              child: CustomText(title: 'You didn\'t have any Schedule ,'),
-            ):
-            ListView.builder(
-              primary: true,
-                shrinkWrap: true,
-                itemCount: 3,
-                itemBuilder: (BuildContext context, int index) {
-                  return CardSchedule();
-                })
+            schedule.items.isEmpty
+                ? Container(
+                    margin: EdgeInsets.symmetric(vertical: 10),
+                    decoration: BoxDecoration(
+                      borderRadius: BorderRadius.circular(15),
+                      color: Style.cardColor,
+                    ),
+                    padding: EdgeInsets.all(10),
+                    alignment: Alignment.center,
+                    child: CustomText(
+                      title: 'You didn\'t Have Any Schedule',
+                      color: Colors.white,
+                    ),
+                  )
+                : ListView.builder(
+                    primary: true,
+                    shrinkWrap: true,
+                    itemCount: 3,
+                    itemBuilder: (BuildContext context, int index) {
+                      return CardSchedule();
+                    })
           ],
         ),
       ),

@@ -48,9 +48,7 @@ class _SchedulDetailState extends State<SchedulDetail> {
           //       });
           //     }),
           IconButton(
-            onPressed: () {
-
-            },
+            onPressed: () {},
             icon: Icon(
               Icons.check,
               color: Style.white,
@@ -106,7 +104,7 @@ class _SchedulDetailState extends State<SchedulDetail> {
               ),
               ListTile(
                 title: Text('Reminder'),
-              //  trailTitle: 'Befor 5 minutes',
+                //  trailTitle: 'Befor 5 minutes',
               ),
               Padding(
                 padding: const EdgeInsets.only(bottom: 10),

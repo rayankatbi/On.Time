@@ -2,7 +2,7 @@
 
 import 'package:flutter/material.dart';
 import 'package:todoapp/constant.dart';
-import 'package:todoapp/widgets/custom_button.dart';
+import 'package:todoapp/widgets/checkbox_state.dart';
 import 'package:todoapp/widgets/custom_text.dart';
 
 class CustomListTile extends StatefulWidget {
@@ -18,54 +18,104 @@ class CustomListTile extends StatefulWidget {
 }
 
 class _CustomListTileState extends State<CustomListTile> {
-  List<String> week = [
-    'Saturday',
-    'Sunday',
-    'Monday',
-    'Tuseday',
-    'Wednesday',
-    'Thursday',
-    'Friday',
+  final week = [
+    CheckboxState(title: 'Saturday'),
+    CheckboxState(title: 'Sunday'),
+    CheckboxState(title: 'Monday'),
+    CheckboxState(title: 'Tuseday'),
+    CheckboxState(title: 'Wednesday'),
+    CheckboxState(title: 'Thursday'),
+    CheckboxState(title: 'Friday'),
   ];
 
   @override
   Widget build(BuildContext context) {
-    bool _checked = false;
+    List selectlist = [];
+    var selecteditem;
     Future showdialog1(BuildContext context) async {
       return showDialog(
           context: context,
           builder: (BuildContext context) {
-            return AlertDialog(
-              title: CustomText(
-                title: 'Repeat',
-                size: 20,
-                fontWeight: FontWeight.bold,
-              ),
-              content: Column(
-                mainAxisSize: MainAxisSize.min,
-                children: [
-                  for (int i = 0; i < week.length; i++)
-                    CheckboxListTile(
-                        title: CustomText(
-                          title: week[i],
-                        ),
-                        value: _checked,
-                        onChanged: (bool? value) {
-                          setState(() {
-                            _checked = value!;
-                          });
-                        }),
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceAround,
-                    children: <Widget>[
-                      CustomButton(title: 'Submit',),
-                      CustomButton(title: 'Cancel',),
+            return StatefulBuilder(builder: (context, stater) {
+            //  List selectlist = [];
 
-                    ],
-                  )
-                ],
-              ),
-            );
+              Widget buildSignleCheckbox(CheckboxState checkbox) =>
+                  CheckboxListTile(
+                      activeColor: Style.mov,
+                      title: CustomText(title: checkbox.title),
+                      value: checkbox.value,
+                      onChanged: (value) {
+                        selecteditem = checkbox.title;
+                        stater(() {
+                          checkbox.value = value!;
+                          if (checkbox.value == true) {
+
+                            selectlist.add(selecteditem);
+                          } else {
+                            selectlist.remove(selecteditem);
+                          }
+                          ;
+                          print(selectlist);
+                        });
+                      });
+              return AlertDialog(
+                shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(20),
+                  side: BorderSide(color: Style.mov, width: 4),
+                ),
+                title: CustomText(
+                  title: 'Repeat',
+                  color: Style.mov,
+                  size: 20,
+                  fontWeight: FontWeight.bold,
+                ),
+                content: Column(
+                  mainAxisSize: MainAxisSize.min,
+                  children: [
+                    ...week.map(buildSignleCheckbox).toList(),
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceAround,
+                      children: <Widget>[
+                        ElevatedButton(
+                          style: ElevatedButton.styleFrom(
+                              primary: Style.mov,
+                              onPrimary: Colors.white,
+                              shape: RoundedRectangleBorder(
+                                borderRadius: BorderRadius.circular(15),
+                              )),
+                          child: CustomText(
+                            title: 'Submit',
+                          ),
+                          onPressed: () {
+                            print('selected item = ${selecteditem}');
+                            print('selected list = ${selectlist}');
+                            setState(() {
+                              Navigator.of(context).pop(selectlist);
+
+                            });
+                          },
+                        ),
+                        ElevatedButton(
+                          style: ElevatedButton.styleFrom(
+                            primary: Style.mov,
+                            onPrimary: Colors.white,
+                            shape: RoundedRectangleBorder(
+                              borderRadius: BorderRadius.circular(15),
+                            ),
+                          ),
+                          onPressed: () {
+                            Navigator.pop(context);
+                          },
+                          child: CustomText(
+                            title: "Cancel",
+                          ),
+                        )
+                      ],
+                    )
+                  ],
+                ),
+              );
+            });
           });
     }
 
@@ -78,17 +128,18 @@ class _CustomListTileState extends State<CustomListTile> {
         mainAxisSize: MainAxisSize.min,
         children: [
           CustomText(
-            title: 'jjjj',
+            title: selectlist.toString(),
             color: Style.grey,
             size: 13,
           ),
           IconButton(
-              icon: Icon(
-                Icons.arrow_forward_ios,
-                size: 15,
-                color: Colors.white,
-              ),
-              onPressed: () => showdialog1(context)),
+            icon: Icon(
+              Icons.arrow_forward_ios,
+              size: 15,
+              color: Colors.white,
+            ),
+            onPressed: () => showdialog1(context),
+          ),
         ],
       ),
     );
