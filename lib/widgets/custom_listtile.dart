@@ -8,9 +8,11 @@ import 'package:todoapp/widgets/custom_text.dart';
 class CustomListTile extends StatefulWidget {
   CustomListTile({
     Key? key,
+    required this.onSubmit,
     required this.title,
   }) : super(key: key);
   final String title;
+  final void Function(List selectedDays) onSubmit;
 
   @override
   State<CustomListTile> createState() => _CustomListTileState();
@@ -27,11 +29,12 @@ class _CustomListTileState extends State<CustomListTile> {
     CheckboxState(title: 'Friday'),
   ];
 
-  List selectlist = [];
-  var selecteditem;
+  List _selectlist = [];
 
-  Future showdialog1(BuildContext context) async {
-    return showDialog(
+  Future<List?> showdialog1(BuildContext context) async {
+    List selectlist = [];
+    var selecteditem;
+    return await showDialog<List?>(
         context: context,
         builder: (BuildContext context) {
           return StatefulBuilder(builder: (context, stater) {
@@ -124,7 +127,7 @@ class _CustomListTileState extends State<CustomListTile> {
         mainAxisSize: MainAxisSize.min,
         children: [
           CustomText(
-            title: "${selectlist.length} days",
+            title: "${_selectlist.length} days",
             color: Style.grey,
             size: 13,
           ),
@@ -134,7 +137,15 @@ class _CustomListTileState extends State<CustomListTile> {
               size: 15,
               color: Colors.white,
             ),
-            onPressed: () => showdialog1(context),
+            onPressed: () async {
+              final List? selectedDaysFromDialog = await showdialog1(context);
+              if (selectedDaysFromDialog != null) {
+                setState(() {
+                  _selectlist = selectedDaysFromDialog;
+                });
+                widget.onSubmit(selectedDaysFromDialog);
+              }
+            },
           ),
         ],
       ),
