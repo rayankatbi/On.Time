@@ -25,11 +25,12 @@ class _NoteDetailState extends State<NoteDetail> {
   late final TextEditingController titleNoteController =
       TextEditingController(text: widget.notee?.title);
 
-//  @override
-  // void dispose() {
-  //   detailNoteController.text = '';
-  //   titleNoteController.text = '';
-  // }
+  @override
+  void dispose() {
+    detailNoteController.dispose();
+    titleNoteController.dispose();
+  }
+
   @override
   Widget build(BuildContext context) {
     final note = Provider.of<NoteProvider>(context);
@@ -42,23 +43,6 @@ class _NoteDetailState extends State<NoteDetail> {
         backgroundColor: Style.cardColor,
         elevation: 0,
         actions: [
-          // IconButton(
-          //   onPressed: () {
-          //     note.updateNote(
-          //       Note(
-          //         id: widget.selectId,
-          //         title: titleNoteController.text,
-          //         content: detailNoteController.text,
-          //         createdTime: formattedDate,
-          //       ),
-          //     );
-          //     Navigator.pop(context);
-          //   },
-          //   icon: Icon(
-          //     Icons.edit,
-          //     color: Colors.white,
-          //   ),
-          // ),
           IconButton(
             onPressed: () {
               widget.notee != null

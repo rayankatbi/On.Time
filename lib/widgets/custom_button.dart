@@ -6,11 +6,11 @@ class CustomButton extends StatelessWidget {
   CustomButton({
     Key? key,
     required this.title,
-  //  required this.onPressed,
+    //  required this.onPressed,
   }) : super(key: key);
 
   final String title;
- // Function onPressed;
+  // Function onPressed;
 
   @override
   Widget build(BuildContext context) {
@@ -21,7 +21,7 @@ class CustomButton extends StatelessWidget {
           shape: RoundedRectangleBorder(
             borderRadius: BorderRadius.circular(15),
           )),
-      onPressed: (){},
+      onPressed: () {},
       child: CustomText(
         title: title,
       ),

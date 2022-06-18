@@ -8,11 +8,8 @@ class CustomListTileDateTimePicker extends StatefulWidget {
   CustomListTileDateTimePicker({
     Key? key,
     required this.title,
-    //   required this.trailTitle,
   }) : super(key: key);
   final String title;
-  //late final String trailTitle;
-
   @override
   State<CustomListTileDateTimePicker> createState() =>
       _CustomListTileDateTimePickerState();
@@ -71,8 +68,6 @@ class _CustomListTileDateTimePickerState
         time.hour,
         time.minute,
       );
-      // print(dateTime1);
-      // print(time.period);
       setState(() => dateTime = dateTime1);
     }
 

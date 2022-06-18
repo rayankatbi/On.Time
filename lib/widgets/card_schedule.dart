@@ -32,7 +32,6 @@ class _CardScheduleState extends State<CardSchedule> {
                   color: Colors.white,
                 ),
                 Checkbox(
-                    // checkColor: Colors.white,
                     side: BorderSide(
                       color: Colors.white,
                       width: 2,
@@ -69,9 +68,7 @@ class _CardScheduleState extends State<CardSchedule> {
                   title: 'Place',
                   color: Colors.white,
                 ),
-                SizedBox(
-                  width: 10,
-                ),
+                SizedBox(width: 10),
                 CustomText(
                   title: 'date/time',
                   color: Colors.white,

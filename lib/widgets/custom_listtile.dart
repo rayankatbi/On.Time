@@ -9,7 +9,6 @@ class CustomListTile extends StatefulWidget {
   CustomListTile({
     Key? key,
     required this.title,
-    // required this.trailTitle,
   }) : super(key: key);
   final String title;
 
@@ -28,97 +27,94 @@ class _CustomListTileState extends State<CustomListTile> {
     CheckboxState(title: 'Friday'),
   ];
 
-  @override
-  Widget build(BuildContext context) {
-    List selectlist = [];
-    var selecteditem;
-    Future showdialog1(BuildContext context) async {
-      return showDialog(
-          context: context,
-          builder: (BuildContext context) {
-            return StatefulBuilder(builder: (context, stater) {
-            //  List selectlist = [];
+  List selectlist = [];
+  var selecteditem;
 
-              Widget buildSignleCheckbox(CheckboxState checkbox) =>
-                  CheckboxListTile(
-                      activeColor: Style.mov,
-                      title: CustomText(title: checkbox.title),
-                      value: checkbox.value,
-                      onChanged: (value) {
-                        selecteditem = checkbox.title;
-                        stater(() {
-                          checkbox.value = value!;
-                          if (checkbox.value == true) {
-
-                            selectlist.add(selecteditem);
-                          } else {
-                            selectlist.remove(selecteditem);
-                          }
-                          ;
-                          print(selectlist);
-                        });
+  Future showdialog1(BuildContext context) async {
+    return showDialog(
+        context: context,
+        builder: (BuildContext context) {
+          return StatefulBuilder(builder: (context, stater) {
+            Widget buildSignleCheckbox(CheckboxState checkbox) =>
+                CheckboxListTile(
+                    activeColor: Style.mov,
+                    title: CustomText(title: checkbox.title),
+                    value: checkbox.value,
+                    onChanged: (value) {
+                      selecteditem = checkbox.title;
+                      stater(() {
+                        checkbox.value = value!;
+                        if (checkbox.value == true) {
+                          selectlist.add(selecteditem);
+                        } else {
+                          selectlist.remove(selecteditem);
+                        }
+                        ;
+                        print(selectlist);
                       });
-              return AlertDialog(
-                shape: RoundedRectangleBorder(
-                  borderRadius: BorderRadius.circular(20),
-                  side: BorderSide(color: Style.mov, width: 4),
-                ),
-                title: CustomText(
-                  title: 'Repeat',
-                  color: Style.mov,
-                  size: 20,
-                  fontWeight: FontWeight.bold,
-                ),
-                content: Column(
-                  mainAxisSize: MainAxisSize.min,
-                  children: [
-                    ...week.map(buildSignleCheckbox).toList(),
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceAround,
-                      children: <Widget>[
-                        ElevatedButton(
-                          style: ElevatedButton.styleFrom(
-                              primary: Style.mov,
-                              onPrimary: Colors.white,
-                              shape: RoundedRectangleBorder(
-                                borderRadius: BorderRadius.circular(15),
-                              )),
-                          child: CustomText(
-                            title: 'Submit',
-                          ),
-                          onPressed: () {
-                            print('selected item = ${selecteditem}');
-                            print('selected list = ${selectlist}');
-                            setState(() {
-                              Navigator.of(context).pop(selectlist);
-
-                            });
-                          },
-                        ),
-                        ElevatedButton(
-                          style: ElevatedButton.styleFrom(
+                    });
+            return AlertDialog(
+              shape: RoundedRectangleBorder(
+                borderRadius: BorderRadius.circular(20),
+                side: BorderSide(color: Style.mov, width: 4),
+              ),
+              title: CustomText(
+                title: 'Repeat',
+                color: Style.mov,
+                size: 20,
+                fontWeight: FontWeight.bold,
+              ),
+              content: Column(
+                mainAxisSize: MainAxisSize.min,
+                children: [
+                  ...week.map(buildSignleCheckbox).toList(),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceAround,
+                    children: <Widget>[
+                      ElevatedButton(
+                        style: ElevatedButton.styleFrom(
                             primary: Style.mov,
                             onPrimary: Colors.white,
                             shape: RoundedRectangleBorder(
                               borderRadius: BorderRadius.circular(15),
-                            ),
+                            )),
+                        child: CustomText(
+                          title: 'Submit',
+                        ),
+                        onPressed: () {
+                          print('selected item = ${selecteditem}');
+                          print('selected list = ${selectlist}');
+                          setState(() {
+                            Navigator.of(context).pop(selectlist);
+                          });
+                        },
+                      ),
+                      ElevatedButton(
+                        style: ElevatedButton.styleFrom(
+                          primary: Style.mov,
+                          onPrimary: Colors.white,
+                          shape: RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(15),
                           ),
-                          onPressed: () {
-                            Navigator.pop(context);
-                          },
-                          child: CustomText(
-                            title: "Cancel",
-                          ),
-                        )
-                      ],
-                    )
-                  ],
-                ),
-              );
-            });
+                        ),
+                        onPressed: () {
+                          Navigator.pop(context);
+                        },
+                        child: CustomText(
+                          title: "Cancel",
+                        ),
+                      )
+                    ],
+                  )
+                ],
+              ),
+            );
           });
-    }
+        });
+  }
 
+  @override
+  Widget build(BuildContext context) {
     return ListTile(
       title: CustomText(
         title: widget.title,
@@ -128,7 +124,7 @@ class _CustomListTileState extends State<CustomListTile> {
         mainAxisSize: MainAxisSize.min,
         children: [
           CustomText(
-            title: selectlist.toString(),
+            title: "${selectlist.length} days",
             color: Style.grey,
             size: 13,
           ),

@@ -26,21 +26,26 @@ class CardNote extends StatelessWidget {
       padding: EdgeInsets.all(10),
       child: Column(
         children: [
-          IconButton(
-            onPressed: () {
-              print(' notee.id = ${notee.id}');
-              note.removeNote(notee.id!);
-            },
-            icon: Icon(
-              Icons.delete,
-              color: Colors.red,
-            ),
-          ),
-          CustomText(
-            title: notee.title,
-            color: Style.white,
-            maxLines: 1,
-            size: 18,
+          Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: <Widget>[
+              CustomText(
+                title: notee.title,
+                color: Style.white,
+                maxLines: 1,
+                size: 18,
+              ),
+              IconButton(
+                onPressed: () {
+                  print(' notee.id = ${notee.id}');
+                  note.removeNote(notee.id!);
+                },
+                icon: Icon(
+                  Icons.delete,
+                  color: Colors.red,
+                ),
+              ),
+            ],
           ),
           SizedBox(
             height: 5,

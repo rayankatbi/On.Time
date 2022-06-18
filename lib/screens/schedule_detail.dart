@@ -1,58 +1,76 @@
 // ignore_for_file: prefer_const_constructors, prefer_const_literals_to_create_immutables
 
-import 'dart:ui';
-
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 import 'package:todoapp/constant.dart';
+import 'package:todoapp/models/schedule_model.dart';
+import 'package:todoapp/providers/schedule_provider.dart';
 import 'package:todoapp/widgets/custom_listtile.dart';
 import 'package:todoapp/widgets/custom_listtile_date_time_picker.dart';
 import 'package:todoapp/widgets/custom_text.dart';
 import 'package:todoapp/widgets/custom_textfield.dart';
 
 class SchedulDetail extends StatefulWidget {
-  SchedulDetail({Key? key}) : super(key: key);
+  SchedulDetail({
+    Key? key,
+    this.schedule,
+  }) : super(key: key);
 
+  Schedule? schedule;
   @override
   State<SchedulDetail> createState() => _SchedulDetailState();
 }
 
 class _SchedulDetailState extends State<SchedulDetail> {
-  bool checkedValue = false;
-  final TextEditingController scheduleController = TextEditingController();
+  final TextEditingController scheduleTitleController = TextEditingController();
   final TextEditingController locationController = TextEditingController();
   final TextEditingController noteController = TextEditingController();
+  bool isSwitch = false;
+
+  @override
+  void dispose() {
+    scheduleTitleController.dispose();
+    locationController.dispose();
+    noteController.dispose();
+    super.dispose();
+  }
+  late CustomListTileDateTimePicker  dateTimePicker;
 
   @override
   Widget build(BuildContext context) {
     final height = MediaQuery.of(context).size.height;
     final width = MediaQuery.of(context).size.width;
+    final schedule = Provider.of<ScheduleProvider>(context);
 
-    bool isSwiched = false;
     return Scaffold(
       backgroundColor: Style.mov,
       appBar: AppBar(
         elevation: 0,
         backgroundColor: Colors.transparent,
         actions: [
-          // Checkbox(
-          //     // checkColor: Colors.white,
-          //     side: BorderSide(
-          //       color: Colors.white,
-          //       width: 2,
-          //     ),
-          //     activeColor: Colors.transparent,
-          //     value: checkedValue,
-          //     onChanged: (value) {
-          //       setState(() {
-          //         checkedValue = value!;
-          //       });
-          //     }),
           IconButton(
-            onPressed: () {},
             icon: Icon(
               Icons.check,
               color: Style.white,
             ),
+            onPressed: () {
+
+              schedule.addSchedule(
+                Schedule(
+                  title: scheduleTitleController.text,
+                  isFullDay: isSwitch,
+                  startDate: startDate,
+                  endDate: endDate,
+                  place: locationController.text,
+                  note: noteController.text,
+                  isChecked: false,
+                  reminder: "Reminder",
+                  repeat: ,
+                ),
+
+               );
+            },
           ),
         ],
       ),
@@ -68,12 +86,10 @@ class _SchedulDetailState extends State<SchedulDetail> {
                 fontWeight: FontWeight.w600,
                 size: 20,
               ),
-              SizedBox(
-                height: 10,
-              ),
+              SizedBox(height: 10),
               CustomTextField(
-                txtEditingController: scheduleController,
-                hintTxt: 'Meeting with anomale team',
+                txtEditingController: scheduleTitleController,
+                hintTxt: 'Shchedule Title',
                 keyboardType: TextInputType.text,
                 maxLines: 1,
               ),
@@ -84,12 +100,11 @@ class _SchedulDetailState extends State<SchedulDetail> {
                 ),
                 trailing: Switch(
                   activeColor: Style.lightMov,
-                  value: isSwiched,
-                  onChanged: (bool value) {
-                    setState(() {
-                      isSwiched = value;
-                    });
-                  },
+                  inactiveTrackColor: Style.darkMov,
+                  value: isSwitch,
+                  onChanged: (value) => setState(() {
+                    isSwitch = value;
+                  }),
                 ),
               ),
               CustomListTileDateTimePicker(
@@ -103,7 +118,10 @@ class _SchedulDetailState extends State<SchedulDetail> {
                 //trailTitle: 'None',
               ),
               ListTile(
-                title: Text('Reminder'),
+                title: CustomText(
+                  title: 'Reminder',
+                  color: Colors.white,
+                ),
                 //  trailTitle: 'Befor 5 minutes',
               ),
               Padding(

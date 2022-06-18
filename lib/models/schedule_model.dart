@@ -4,7 +4,7 @@ class Schedule {
   final int? id;
   final String title;
   final bool isFullDay;
-  final String  startDate;
+  final String startDate;
   final String endDate;
   final String place;
   final String note;
@@ -13,7 +13,7 @@ class Schedule {
   final String repeat;
 
   Schedule(
-      {required this.id,
+      {this.id,
       required this.title,
       required this.isFullDay,
       required this.startDate,
