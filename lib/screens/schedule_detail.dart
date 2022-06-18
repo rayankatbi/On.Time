@@ -27,6 +27,8 @@ class _SchedulDetailState extends State<SchedulDetail> {
   final TextEditingController locationController = TextEditingController();
   final TextEditingController noteController = TextEditingController();
   bool isSwitch = false;
+  DateTime? _startDate, _endDate;
+  List _selectedDays = [];
 
   @override
   void dispose() {
@@ -35,7 +37,8 @@ class _SchedulDetailState extends State<SchedulDetail> {
     noteController.dispose();
     super.dispose();
   }
-  late CustomListTileDateTimePicker  dateTimePicker;
+
+  late CustomListTileDateTimePicker dateTimePicker;
 
   @override
   Widget build(BuildContext context) {
@@ -53,21 +56,20 @@ class _SchedulDetailState extends State<SchedulDetail> {
               color: Style.white,
             ),
             onPressed: () {
+              // schedule.addSchedule(
+              //   Schedule(
+              //     title: scheduleTitleController.text,
+              //     isFullDay: isSwitch,
+              //     startDate: _startDate,
+              //     endDate: _endDate!,
+              //     place: locationController.text,
+              //     note: noteController.text,
+              //     isChecked: false,
+              //     reminder: "Reminder",
+              //     repeat: _selectedDays,
+              //   ),
 
-              schedule.addSchedule(
-                Schedule(
-                  title: scheduleTitleController.text,
-                  isFullDay: isSwitch,
-                  startDate: startDate,
-                  endDate: endDate,
-                  place: locationController.text,
-                  note: noteController.text,
-                  isChecked: false,
-                  reminder: "Reminder",
-                  repeat: ,
-                ),
-
-               );
+              //  );
             },
           ),
         ],
@@ -107,11 +109,26 @@ class _SchedulDetailState extends State<SchedulDetail> {
               ),
               CustomListTileDateTimePicker(
                 title: 'Start From',
+                onDateTimeSelected: (startDate) {
+                  setState(() {
+                    _startDate = startDate;
+                  });
+                },
               ),
               CustomListTileDateTimePicker(
                 title: 'Finish',
+                onDateTimeSelected: (endDate) {
+                  setState(() {
+                    _endDate = endDate;
+                  });
+                },
               ),
               CustomListTile(
+                onSubmit: (selectedDays) {
+                  setState(() {
+                    _selectedDays = selectedDays;
+                  });
+                },
                 title: 'Repeat',
                 //trailTitle: 'None',
               ),

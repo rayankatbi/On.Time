@@ -25,8 +25,8 @@ class NotificationScreen extends StatelessWidget {
           itemCount: 3,
           itemBuilder: (BuildContext context, int index) {
             return CustomListTile(
-              title: 'Dinner with anna',
-             // trailTitle: 'date/time',
+              title: 'Dinner with anna', onSubmit: (selectedDays) {},
+              // trailTitle: 'date/time',
             );
           }),
     );

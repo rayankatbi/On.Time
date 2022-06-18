@@ -6,10 +6,12 @@ import 'package:todoapp/widgets/custom_text.dart';
 
 class CustomListTileDateTimePicker extends StatefulWidget {
   CustomListTileDateTimePicker({
+    required this.onDateTimeSelected,
     Key? key,
     required this.title,
   }) : super(key: key);
   final String title;
+  final void Function(DateTime? selectedDate) onDateTimeSelected;
   @override
   State<CustomListTileDateTimePicker> createState() =>
       _CustomListTileDateTimePickerState();
@@ -68,6 +70,7 @@ class _CustomListTileDateTimePickerState
         time.hour,
         time.minute,
       );
+      widget.onDateTimeSelected(dateTime1);
       setState(() => dateTime = dateTime1);
     }
 
