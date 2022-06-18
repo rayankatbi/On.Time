@@ -39,8 +39,6 @@ class _SchedulDetailState extends State<SchedulDetail> {
 
   @override
   Widget build(BuildContext context) {
-    final height = MediaQuery.of(context).size.height;
-    final width = MediaQuery.of(context).size.width;
     final schedule = Provider.of<ScheduleProvider>(context);
 
     return Scaffold(
