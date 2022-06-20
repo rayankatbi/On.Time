@@ -11,7 +11,8 @@ class CustomListTileDateTimePicker extends StatefulWidget {
     required this.title,
   }) : super(key: key);
   final String title;
-  final void Function(DateTime? selectedDate) onDateTimeSelected;
+  final void Function(DateTime selectedDate) onDateTimeSelected;
+
   @override
   State<CustomListTileDateTimePicker> createState() =>
       _CustomListTileDateTimePickerState();
@@ -60,7 +61,7 @@ class _CustomListTileDateTimePickerState
 
     Future pickDateTime() async {
       DateTime? date = await pickDate();
-      if (date == null) return;
+      if (date == null) return dateTime = DateTime.now();
       TimeOfDay? time = await pickTime();
       if (time == null) return;
       var dateTime1 = DateTime(
@@ -72,6 +73,7 @@ class _CustomListTileDateTimePickerState
       );
       widget.onDateTimeSelected(dateTime1);
       setState(() => dateTime = dateTime1);
+      print(" hour :${dateTime.hour}");
     }
 
     var trailTitle =

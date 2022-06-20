@@ -16,9 +16,18 @@ class ScheduleDatabaseHelper {
     return scheduleList;
   }
 
-  Future<int> addSchedule(Schedule schedule) async {
+   Future<Schedule> addSchedule(Schedule schedule) async {
     Database db = await DataBaseHelper.instance.database;
-    return await db.insert(scheduleTable, schedule.toJson());
+    await db.insert(scheduleTable, schedule.toJson());
+    final justAddedSchedule = Schedule.fromJson(
+      (await db.query(
+        scheduleTable,
+        orderBy: 'id DESC',
+        limit: 1,
+      ))
+          .first,
+    );
+    return justAddedSchedule;
   }
 
   Future<int> updateSchedule(Schedule schedule) async {
@@ -31,12 +40,12 @@ class ScheduleDatabaseHelper {
     );
   }
 
-  Future<int> removeSchedule(Schedule schedule) async {
+  Future<int> removeSchedule(int id) async {
     Database db = await DataBaseHelper.instance.database;
     return await db.delete(
       scheduleTable,
       where: 'id=?',
-      whereArgs: [schedule.id],
+      whereArgs: [id],
     );
   }
 }

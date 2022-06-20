@@ -68,12 +68,12 @@ class DataBaseHelper {
    CREATE TABLE $scheduleTable (
      $idSched INTEGER PRIMARY KEY AUTOINCREMENT,
      $titleSched TEXT NOT NULL,
-     $isfulldaySched $boolType,
+     $isfulldaySched INTEGER DEFAULT 0,
      $startdateSched TEXT NOT NULL,
      $enddateSched TEXT NOT NULL,
      $placeSched TEXT NOT NULL,
      $noteSched TEXT NOT NULL,
-     $isCheckSched $boolType,
+     $isCheckSched INTEGER DEFAULT 0,
      $reminderSched TEXT NOT NULL,
      $repeatSched TEXT NOT NULL
     )

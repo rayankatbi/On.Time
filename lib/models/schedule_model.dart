@@ -8,31 +8,31 @@ class Schedule {
   final String endDate;
   final String place;
   final String note;
-  final bool isChecked;
+    bool isChecked ;
   final String reminder;
   final String repeat;
 
   Schedule(
       {this.id,
       required this.title,
-      required this.isFullDay,
+      required this.isFullDay ,
       required this.startDate,
       required this.endDate,
       required this.place,
       required this.note,
-      required this.isChecked,
+     required  this.isChecked ,
       required this.reminder,
       required this.repeat});
 
   factory Schedule.fromJson(Map<String, dynamic> json) => Schedule(
         id: json['id'],
         title: json['title'],
-        isFullDay: json['isFullDay'],
+        isFullDay: json['isFullDay'] == 1,
         startDate: json['startDate'],
         endDate: json['endDate'],
         place: json['place'],
         note: json['note'],
-        isChecked: json['isChecked'],
+        isChecked: json['isChecked'] == 1,
         reminder: json['reminder'],
         repeat: json['repeat'],
       );
@@ -40,12 +40,12 @@ class Schedule {
   Map<String, dynamic> toJson() => {
         'id': id,
         'title': title,
-        'isFullDay': isFullDay,
+        'isFullDay': isFullDay == true? 1 : 0,
         'startDate': startDate,
         'endDate': endDate,
         'place': place,
         'note': note,
-        'isChecked': isChecked,
+        'isChecked': isChecked == true? 1 : 0,
         'reminder': reminder,
         'repeat': repeat,
       };

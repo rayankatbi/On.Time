@@ -56,60 +56,62 @@ class _CustomListTileState extends State<CustomListTile> {
                         print(selectlist);
                       });
                     });
-            return AlertDialog(
-              shape: RoundedRectangleBorder(
-                borderRadius: BorderRadius.circular(20),
-                side: BorderSide(color: Style.mov, width: 4),
-              ),
-              title: CustomText(
-                title: 'Repeat',
-                color: Style.mov,
-                size: 20,
-                fontWeight: FontWeight.bold,
-              ),
-              content: Column(
-                mainAxisSize: MainAxisSize.min,
-                children: [
-                  ...week.map(buildSignleCheckbox).toList(),
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceAround,
-                    children: <Widget>[
-                      ElevatedButton(
-                        style: ElevatedButton.styleFrom(
+            return SingleChildScrollView(
+              child: AlertDialog(
+                shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(20),
+                  side: BorderSide(color: Style.mov, width: 4),
+                ),
+                title: CustomText(
+                  title: 'Repeat',
+                  color: Style.mov,
+                  size: 20,
+                  fontWeight: FontWeight.bold,
+                ),
+                content: Column(
+                  mainAxisSize: MainAxisSize.min,
+                  children: [
+                    ...week.map(buildSignleCheckbox).toList(),
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceAround,
+                      children: <Widget>[
+                        ElevatedButton(
+                          style: ElevatedButton.styleFrom(
+                              primary: Style.mov,
+                              onPrimary: Colors.white,
+                              shape: RoundedRectangleBorder(
+                                borderRadius: BorderRadius.circular(15),
+                              )),
+                          child: CustomText(
+                            title: 'Submit',
+                          ),
+                          onPressed: () {
+                            print('selected item = ${selecteditem}');
+                            print('selected list = ${selectlist}');
+                            setState(() {
+                              Navigator.of(context).pop(selectlist);
+                            });
+                          },
+                        ),
+                        ElevatedButton(
+                          style: ElevatedButton.styleFrom(
                             primary: Style.mov,
                             onPrimary: Colors.white,
                             shape: RoundedRectangleBorder(
                               borderRadius: BorderRadius.circular(15),
-                            )),
-                        child: CustomText(
-                          title: 'Submit',
-                        ),
-                        onPressed: () {
-                          print('selected item = ${selecteditem}');
-                          print('selected list = ${selectlist}');
-                          setState(() {
-                            Navigator.of(context).pop(selectlist);
-                          });
-                        },
-                      ),
-                      ElevatedButton(
-                        style: ElevatedButton.styleFrom(
-                          primary: Style.mov,
-                          onPrimary: Colors.white,
-                          shape: RoundedRectangleBorder(
-                            borderRadius: BorderRadius.circular(15),
+                            ),
                           ),
-                        ),
-                        onPressed: () {
-                          Navigator.pop(context);
-                        },
-                        child: CustomText(
-                          title: "Cancel",
-                        ),
-                      )
-                    ],
-                  )
-                ],
+                          onPressed: () {
+                            Navigator.pop(context);
+                          },
+                          child: CustomText(
+                            title: "Cancel",
+                          ),
+                        )
+                      ],
+                    )
+                  ],
+                ),
               ),
             );
           });

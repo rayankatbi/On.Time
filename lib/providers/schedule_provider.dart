@@ -12,9 +12,12 @@ class ScheduleProvider with ChangeNotifier {
   }
 
   Future addSchedule(Schedule schedule) async {
-    _items.insert(0, schedule);
+    _items.insert(
+        0, await ScheduleDatabaseHelper.instance.addSchedule(schedule));
     notifyListeners();
-    await ScheduleDatabaseHelper.instance.addSchedule(schedule);
+    // _items.insert(0, schedule);
+    // notifyListeners();
+    // await ScheduleDatabaseHelper.instance.addSchedule(schedule);
   }
 
   Future updateSchedule(Schedule schedule) async {
@@ -24,9 +27,9 @@ class ScheduleProvider with ChangeNotifier {
     await ScheduleDatabaseHelper.instance.updateSchedule(schedule);
   }
 
-  Future removeSchedule(Schedule schedule) async {
-    _items.removeWhere((e) => e.id == schedule.id);
+  Future removeSchedule(int id) async {
+    _items.removeWhere((e) => e.id == id);
     notifyListeners();
-    await ScheduleDatabaseHelper.instance.removeSchedule(schedule);
+    await ScheduleDatabaseHelper.instance.removeSchedule(id);
   }
 }

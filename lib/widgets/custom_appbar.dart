@@ -22,39 +22,11 @@ class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
   Widget build(BuildContext context) {
     return AppBar(
       automaticallyImplyLeading: false,
-        backgroundColor: Colors.transparent,
-        title: CustomText(
-          title: 'On.Time',
-          fontWeight: FontWeight.w700,
-        ),
-        actions: [
-          IconButton(
-            onPressed: () {
-              Navigator.push(
-                context,
-                MaterialPageRoute(
-                  builder: (context) => NotificationScreen(),
-                ),
-              );
-            },
-            icon: Icon(
-              Icons.notifications,
-              color: Style.white,
-            ),
-          ),
-          IconButton(
-            onPressed: () {
-              Navigator.push(
-                context,
-                MaterialPageRoute(
-                  builder: (context) => SettingScreen(),
-                ),
-              );
-            },
-            icon: Icon(
-              Icons.more_vert,
-            ),
-          ),
-        ]);
+      backgroundColor: Colors.transparent,
+      title: CustomText(
+        title: 'On.Time',
+        fontWeight: FontWeight.w700,
+      ),
+    );
   }
 }

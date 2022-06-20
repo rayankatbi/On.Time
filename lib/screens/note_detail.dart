@@ -29,6 +29,7 @@ class _NoteDetailState extends State<NoteDetail> {
   void dispose() {
     detailNoteController.dispose();
     titleNoteController.dispose();
+    super.dispose();
   }
 
   @override
@@ -46,21 +47,17 @@ class _NoteDetailState extends State<NoteDetail> {
           IconButton(
             onPressed: () {
               widget.notee != null
-                  ? note.updateNote(
-                      Note(
-                        id: widget.notee!.id,
-                        title: titleNoteController.text,
-                        content: detailNoteController.text,
-                        createdTime: formattedDate,
-                      ),
-                    )
-                  : note.addNotes(
-                      Note(
-                        title: titleNoteController.text,
-                        content: detailNoteController.text,
-                        createdTime: formattedDate,
-                      ),
-                    );
+                  ? note.updateNote(Note(
+                      id: widget.notee!.id,
+                      title: titleNoteController.text,
+                      content: detailNoteController.text,
+                      createdTime: formattedDate,
+                    ))
+                  : note.addNotes(Note(
+                      title: titleNoteController.text,
+                      content: detailNoteController.text,
+                      createdTime: formattedDate,
+                    ));
               Navigator.pop(context);
             },
             icon: Icon(Icons.check, color: Colors.white),
@@ -72,6 +69,7 @@ class _NoteDetailState extends State<NoteDetail> {
         child: Column(
           children: [
             TextFormField(
+              cursorColor: Colors.white,
               controller: titleNoteController,
               style: TextStyle(
                 color: Colors.white,
@@ -88,6 +86,7 @@ class _NoteDetailState extends State<NoteDetail> {
             TextFormField(
               controller: detailNoteController,
               keyboardType: TextInputType.multiline,
+              cursorColor: Colors.white,
               maxLines: null,
               style: TextStyle(
                 color: Colors.white,

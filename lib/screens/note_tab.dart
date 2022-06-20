@@ -16,24 +16,17 @@ class NoteTab extends StatelessWidget {
   int? selectedId;
   @override
   Widget build(BuildContext context) {
-    final height = MediaQuery.of(context).size.height;
-    final width = MediaQuery.of(context).size.width;
+    final size = MediaQuery.of(context).size;
 
     final TextEditingController searchController = TextEditingController();
     final note = Provider.of<NoteProvider>(context);
     return Padding(
-      padding: EdgeInsets.symmetric(horizontal: width * 0.09, vertical: 20),
+      padding: EdgeInsets.symmetric(horizontal: size.width * 0.09, vertical: 20),
       child: SingleChildScrollView(
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.center,
           children: [
-            CustomTextField(
-              txtEditingController: searchController,
-              hintTxt: 'Search Note',
-              prefixIcon: Icons.search,
-              keyboardType: TextInputType.text,
-            ),
-            note.items.isEmpty
+            note.getNotes() == null
                 ? Container(
                     margin: EdgeInsets.symmetric(vertical: 10),
                     decoration: BoxDecoration(
@@ -47,7 +40,7 @@ class NoteTab extends StatelessWidget {
                     ),
                   )
                 : ListView.builder(
-                    primary: true,
+                    physics: NeverScrollableScrollPhysics(),
                     shrinkWrap: true,
                     itemCount: note.lengthItems(),
                     itemBuilder: (BuildContext context, int index) {

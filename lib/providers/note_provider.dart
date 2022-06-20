@@ -6,11 +6,17 @@ class NoteProvider with ChangeNotifier {
   List<Note> _items = [];
   List<Note> get items => [..._items];
 
-
   Future getNotes() async {
     _items = await NoteDatabaseHelper.instance.getNotes();
     notifyListeners();
   }
+
+  // bool isExcist() {
+  //   if (_items.isNotEmpty)
+  //     return false;
+  //   else
+  //     return true;
+  // }
 
   Future addNotes(Note note) async {
     _items.insert(0, await NoteDatabaseHelper.instance.addNote(note));

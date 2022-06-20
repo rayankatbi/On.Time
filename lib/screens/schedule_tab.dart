@@ -2,7 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:table_calendar/table_calendar.dart';
 import 'package:todoapp/constant.dart';
+import 'package:todoapp/models/schedule_model.dart';
 import 'package:todoapp/providers/schedule_provider.dart';
+import 'package:todoapp/screens/schedule_detail.dart';
 import 'package:todoapp/widgets/card_schedule.dart';
 import 'package:todoapp/widgets/custom_text.dart';
 
@@ -17,7 +19,7 @@ class _ScheduleTabState extends State<ScheduleTab> {
   @override
   @override
   Widget build(BuildContext context) {
-    final schedule = Provider.of<ScheduleProvider>(context);
+    final schedule = Provider.of<ScheduleProvider>(context, listen: false);
     return Padding(
       padding: const EdgeInsets.symmetric(horizontal: 10),
       child: SingleChildScrollView(
@@ -68,7 +70,7 @@ class _ScheduleTabState extends State<ScheduleTab> {
               fontWeight: FontWeight.w500,
               size: 20,
             ),
-            schedule.items.isEmpty
+            schedule.getSchedule() == null
                 ? Container(
                     margin: EdgeInsets.symmetric(vertical: 10),
                     decoration: BoxDecoration(
@@ -83,12 +85,49 @@ class _ScheduleTabState extends State<ScheduleTab> {
                     ),
                   )
                 : ListView.builder(
-                    primary: true,
+                    physics: NeverScrollableScrollPhysics(),
                     shrinkWrap: true,
-                    itemCount: 3,
+                    itemCount: schedule.items.length,
                     itemBuilder: (BuildContext context, int index) {
-                      return CardSchedule();
-                    })
+                      // var schedIndex = schedule.items[index];
+                      return GestureDetector(
+                        onTap: () {
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                              builder: (context) => SchedulDetail(
+                                schedulee: Schedule(
+                                  id: schedule.items[index].id,
+                                  title: schedule.items[index].title,
+                                  isFullDay: schedule.items[index].isFullDay,
+                                  startDate: schedule.items[index].startDate,
+                                  endDate: schedule.items[index].endDate,
+                                  place: schedule.items[index].place,
+                                  note: schedule.items[index].note,
+                                  isChecked: schedule.items[index].isChecked,
+                                  reminder: schedule.items[index].reminder,
+                                  repeat: schedule.items[index].repeat,
+                                ),
+                              ),
+                            ),
+                          );
+                        },
+                        child: CardSchedule(
+                          schedule: Schedule(
+                            id: schedule.items[index].id,
+                            title: schedule.items[index].title,
+                            isFullDay: schedule.items[index].isFullDay,
+                            startDate: schedule.items[index].startDate,
+                            endDate: schedule.items[index].endDate,
+                            place: schedule.items[index].place,
+                            note: schedule.items[index].note,
+                            isChecked: schedule.items[index].isChecked,
+                            reminder: schedule.items[index].reminder,
+                            repeat: schedule.items[index].repeat,
+                          ),
+                        ),
+                      );
+                    }),
           ],
         ),
       ),

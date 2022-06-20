@@ -29,7 +29,7 @@ class CustomText extends StatelessWidget {
     return Text(
       title!,
       maxLines: maxLines,
-      overflow: TextOverflow.fade,
+      overflow: TextOverflow.ellipsis,
       softWrap: true,
       textAlign: textAlign,
       style: TextStyle(

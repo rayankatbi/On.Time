@@ -2,15 +2,10 @@
 
 import 'package:flutter/material.dart';
 import 'package:todoapp/constant.dart';
-import 'package:todoapp/screens/note_detail.dart';
 import 'package:todoapp/screens/note_tab.dart';
-import 'package:todoapp/screens/notification_screen.dart';
-import 'package:todoapp/screens/schedule_detail.dart';
 import 'package:todoapp/screens/schedule_tab.dart';
-import 'package:todoapp/screens/setting_screen.dart';
 import 'package:todoapp/widgets/custom_appbar.dart';
 import 'package:todoapp/widgets/custom_text.dart';
-import 'package:flutter_speed_dial/flutter_speed_dial.dart';
 import 'package:todoapp/widgets/floating_actionButton_widget.dart';
 
 class MainPage extends StatefulWidget {
@@ -23,8 +18,7 @@ class MainPage extends StatefulWidget {
 class _MainPageState extends State<MainPage> {
   @override
   Widget build(BuildContext context) {
-    final height = MediaQuery.of(context).size.height;
-    final width = MediaQuery.of(context).size.width;
+    final size = MediaQuery.of(context).size;
 
     return Container(
       decoration: BoxDecoration(
@@ -51,7 +45,7 @@ class _MainPageState extends State<MainPage> {
               Container(
                 // padding: const EdgeInsets.symmetric(vertical: 20,horizontal: 40),
                 margin: EdgeInsets.symmetric(
-                    horizontal: width * 0.23, vertical: 20),
+                    horizontal: size.width * 0.23, vertical: 20),
                 decoration: BoxDecoration(
                   color: Style.mov,
                   borderRadius: BorderRadius.circular(10),

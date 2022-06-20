@@ -16,6 +16,7 @@ class CustomTextField extends StatelessWidget {
     //   required this.heightPro,
     //     required this.widthPro,
     required this.txtEditingController,
+    required this.cursorColor,
   }) : super(key: key);
 
   // final String labelTxt;
@@ -23,19 +24,18 @@ class CustomTextField extends StatelessWidget {
   final String hintTxt;
   final int? maxLines;
   final TextInputType keyboardType;
+  final Color cursorColor;
   //final heightPro  ;
   // final widthPro;
   TextEditingController txtEditingController = TextEditingController();
 
   @override
   Widget build(BuildContext context) {
-    final height = MediaQuery.of(context).size.height;
-    final width = MediaQuery.of(context).size.width;
-
     return TextField(
       controller: txtEditingController,
       keyboardType: keyboardType,
       maxLines: maxLines,
+      cursorColor: cursorColor,
       style: TextStyle(
         color: Colors.white,
       ),
@@ -49,8 +49,9 @@ class CustomTextField extends StatelessWidget {
           borderRadius: BorderRadius.circular(15),
         ),
         hintText: hintTxt,
-        hintStyle: const TextStyle(
+        hintStyle: TextStyle(
           fontFamily: 'Open Sans',
+          color: Colors.grey.shade600,
         ),
         filled: true,
         fillColor: Style.lightMov,
@@ -58,11 +59,8 @@ class CustomTextField extends StatelessWidget {
           prefixIcon,
           color: Colors.grey[600],
         ),
-        // constraints: BoxConstraints.expand(
-        //   width: width,
-        //   height:height,
-        // ),
       ),
+      showCursor: true,
     );
   }
 }
